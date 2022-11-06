@@ -1,0 +1,91 @@
+unit Тест;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Data.Win.ADODB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.Imaging.jpeg, Vcl.ExtCtrls;
+
+type
+  TTest = class(TForm)
+    Image1: TImage;
+    RadioGroup1: TRadioGroup;
+    Button1: TButton;
+    Button2: TButton;
+    Label1: TLabel;
+    procedure Button1Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+    private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Test: TTest;
+  f:textfile;
+  Nvern,ball:integer;
+  s:UTF8string;
+implementation
+
+{$R *.dfm}
+
+
+
+procedure TTest.Button1Click(Sender: TObject);
+begin
+   RadioGroup1.Enabled:=true;
+   AssignFile(f,'Resources\Test\Test.txt');
+   reset(f);
+   readln(f,s);
+   ball:=0;
+   repeat
+   if (s[1]='-')then begin
+   delete(s,1,1);
+   RadioGroup1.Caption:=s;
+   end
+   else if s[1]='*' then begin
+   delete(s,1,1);
+   Nvern:=StrToInt(s);
+   end
+   else RadioGroup1.Items.Add(s);
+   readln(f,s);
+   until(s[1]='-')or(Eof(f));
+   Button1.Visible:=False;
+   Button2.Visible:=True;
+   end;
+
+procedure TTest.Button2Click(Sender: TObject);
+begin
+if (RadioGroup1.ItemIndex>-1) and (not Eof(f)) then begin
+if RadioGroup1.ItemIndex = Nvern-1 then ball:=ball+1;
+RadioGroup1.Items.Clear;
+Repeat
+if (s[1]='-') then begin
+delete(s,1,1);
+RadioGroup1.Caption:=s;
+end
+else if s[1]='*' then begin
+delete(s,1,1);
+Nvern:=StrToInt(s);
+
+end
+
+else RadioGroup1.Items.Add(s);
+readln(f,s);
+
+until (s[1]='-') or (Eof(f));
+end
+
+Else if Eof(f) then begin
+delete(s,1,1);
+Nvern:=StrToInt(s);
+if RadioGroup1.ItemIndex = Nvern-1 then ball:=ball+1;
+Label1.Caption:=IntToStr(ball);
+CloseFile(f);
+Button1.Enabled:=False;
+
+end;
+end;
+end.

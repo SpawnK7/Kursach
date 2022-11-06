@@ -1,0 +1,46 @@
+unit Raskraska;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TPainter = class(TForm)
+    Image1: TImage;
+    Button1: TButton;
+    ColorDialog1: TColorDialog;
+    Button2: TButton;
+    Button3: TButton;
+    procedure Button1Click(Sender: TObject);
+    procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Painter: TPainter;
+  col: TColor;
+
+implementation
+
+{$R *.dfm}
+
+procedure TPainter.Button1Click(Sender: TObject);
+begin
+if ColorDialog1.Execute then
+  col:= ColorDialog1.Color;
+end;
+
+procedure TPainter.Image1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+Image1.Canvas.Brush.Color:=col;
+Image1.Canvas.FloodFill(x,y,clBlack,fsBorder);
+end;
+
+end.

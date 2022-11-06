@@ -1,0 +1,67 @@
+unit Raskraska;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.StdCtrls;
+
+type
+  TPainter = class(TForm)
+    Button1: TButton;
+    ColorDialog1: TColorDialog;
+    Button2: TButton;
+    Button3: TButton;
+    Image1: TImage;
+    SaveDialog1: TSaveDialog;
+    procedure Button1Click(Sender: TObject);
+    procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure Button3Click(Sender: TObject);
+    procedure Button2Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  k: string;
+  Painter: TPainter;
+  col: TColor;
+
+implementation
+
+{$R *.dfm}
+
+procedure TPainter.Button1Click(Sender: TObject);
+begin
+if ColorDialog1.Execute then
+  col:= ColorDialog1.Color;
+end;
+
+procedure TPainter.Button2Click(Sender: TObject);
+begin
+Image1.Picture.LoadFromFile(k);
+end;
+
+procedure TPainter.Button3Click(Sender: TObject);
+begin
+var name:string;
+if SaveDialog1.Execute then
+begin
+name:= SaveDialog1.FileName+'.bmp';
+Image1.Picture.SaveToFile(name)
+end
+else ShowMessage('Файл не сохранён');
+end;
+
+
+procedure TPainter.Image1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+Image1.Canvas.Brush.Color:=col;
+Image1.Canvas.FloodFill(x,y,clBlack,fsBorder);
+end;
+
+end.

@@ -1,0 +1,68 @@
+unit Главная;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.pngimage, Vcl.ExtCtrls,
+  Vcl.StdCtrls, Vcl.Imaging.jpeg;
+
+type
+  TMain_Form = class(TForm)
+    Painter: TImage;
+    Image1: TImage;
+    Rules: TImage;
+    Stats: TImage;
+    Test: TImage;
+
+    procedure PainterClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure RulesClick(Sender: TObject);
+    procedure StatsClick(Sender: TObject);
+    procedure TestClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Main_Form: TMain_Form;
+implementation
+
+
+{$R *.dfm}
+
+uses Экран_Загрузки, Раскраска, Выбор_персонажа,
+  Главные_правила, Тест, Характеристики;
+
+
+
+procedure TMain_Form.FormActivate(Sender: TObject);
+begin
+Image1.Align:=alClient;
+end;
+
+procedure TMain_Form.RulesClick(Sender: TObject);
+begin
+Core_rules.ShowModal;
+end;
+
+procedure TMain_Form.StatsClick(Sender: TObject);
+begin
+Stats.Show;
+end;
+
+procedure TMain_Form.TestClick(Sender: TObject);
+begin
+Test.Show;
+end;
+
+procedure TMain_Form.PainterClick(Sender: TObject);
+begin
+Main_Form.Hide;
+Choice.Show;
+ShowMessage('Выберите того, чью цветовую схему будете составлять');
+end;
+
+end.

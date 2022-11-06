@@ -1,0 +1,422 @@
+unit Расчёты;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Data.Win.ADODB, Vcl.Grids,
+  Vcl.DBGrids, Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.Imaging.jpeg, Vcl.ExtCtrls;
+
+type
+  TCalculations = class(TForm)
+    ADOConnection1: TADOConnection;
+    DataSource1: TDataSource;
+    ADOQuery1: TADOQuery;
+    UnitsBox: TDBGrid;
+    GroupsBox: TListBox;
+    Group: TLabel;
+    Army: TLabel;
+    ArmyBox: TListBox;
+    Units: TLabel;
+    You: TLabel;
+    Opponent: TLabel;
+    NArmy: TLabel;
+    NArmyBox: TListBox;
+    NGroup: TLabel;
+    NGroupsBox: TListBox;
+    NUnits: TLabel;
+    NUnitsBox: TDBGrid;
+    Count: TSpinEdit;
+    NCount: TSpinEdit;
+    ADOQuery2: TADOQuery;
+    DataSource2: TDataSource;
+    HTH: TButton;
+    Shooting: TButton;
+    DBGrid1: TDBGrid;
+    ADOQuery3: TADOQuery;
+    DataSource3: TDataSource;
+    Maxdmg: TLabel;
+    MaxDead: TLabel;
+    KillModels: TLabel;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Image1: TImage;
+    Label4: TLabel;
+    procedure FormActivate(Sender: TObject);
+    procedure ShootingClick(Sender: TObject);
+    procedure GroupsBoxClick(Sender: TObject);
+    procedure ArmyBoxClick(Sender: TObject);
+    procedure NArmyBoxClick(Sender: TObject);
+    procedure NGroupsBoxClick(Sender: TObject);
+    procedure UnitsBoxEnter(Sender: TObject);
+    procedure NUnitsBoxEnter(Sender: TObject);
+    procedure HTHClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Calculations: TCalculations;
+
+implementation
+
+{$R *.dfm}
+
+procedure TCalculations.ShootingClick(Sender: TObject);
+var models,Sv,BS,AP,S,T,ST,Shots,k,col,max_dmg,max_i:integer;
+    str,wep,D:string;
+    Weapons: array of string;
+    Damage: array of integer;
+    max,kill:real;
+  i: Integer;
+begin
+setlength(Damage,10000);
+max:=0;
+max_i:=0;
+kill:=0;
+if ADOQuery1.Fields.Fields[10].AsString='None' then
+  begin
+  label1.Visible:=True;
+  Label1.Caption:='Отряду нечем стрелять';
+  end else
+k:=0;
+wep:=ADOQuery1.Fields.Fields[10].AsString;
+if pos(',',wep)<>0 then
+  while wep<>'' do
+    begin
+    Weapons[k]:=copy(wep,pos(',',wep)-1,pos(',',wep)-1);
+    inc(k);
+    Delete(wep,1,pos(',',wep));
+    end;
+SetLength(Weapons,k+1);
+for var r := 1 to 10000 do
+  begin
+  for var q := 0 to k-1 do
+    begin
+    ADOQuery3.SQL.Clear;
+    ADOQuery3.SQL.Add('SELECT * FROM Ballistic_Weapon');
+    ADOQuery3.Active:=True;
+    ADOQuery3.Filtered:=False;
+    Label4.Caption:=Weapons[q];
+    ADOQuery3.Filter:='Ballistic_Weapon LIKE ''%'+Weapons[q]+'%''';
+    ADOQuery3.Filtered:=True;
+    randomize;
+    AP:=ADOQuery3.Fields.Fields[2].AsInteger;
+    BS:=ADOQuery1.Fields.Fields[4].AsInteger;
+    S:=ADOQuery3.Fields.Fields[1].AsInteger;
+    T:=ADOQuery2.Fields.Fields[6].AsInteger;
+    Sv:=ADOQuery2.Fields.Fields[9].AsInteger;
+    if S div T>1 then
+      ST:=2 else
+      if S > T then
+        ST:=3 else
+        if S = T then
+          ST:=4;
+            if S < T then
+              ST:=5 else ST:=6;
+    Shots:=0;
+    models:=Count.Value;
+    str:=ADOQuery3.Fields.Fields[5].AsString;
+    if str[1]='D' then
+    for i := 1 to models do
+      Shots:=(random(StrToInt(str[2]))+1)+Shots else
+    if str[2]='D' then
+    for i := 1 to models do
+      begin
+          Shots:=StrToInt(str[1])*(random(StrToInt(str[3]))+1)+Shots;
+      end else Shots:=StrToInt(str);
+    D:=ADOQuery3.Fields.Fields[3].AsString;
+    for var p:=1 to Shots do
+      if random(6)+1>=BS then
+        if random(6)+1>=ST then
+          if random(6)+1>=(Sv-AP) then
+            if length(D)=1 then col:=col+StrToInt(D) else
+              if D[1]='D' then
+                col:=col+random(StrToInt(D[2]))+1 else
+                if D[2]='D' then
+                  col:=col+(random(StrToInt(D[3]))+1)*StrToInt(D[1]);
+    end;
+    Damage[col]:=Damage[col]+1;
+    if max_dmg<col then max_dmg:=col;
+  end;
+setlength(Damage,max_dmg+1);
+for i := 0 to max_dmg do
+  begin
+  if i>=(ADOQuery2.Fields.Fields[7].AsInteger*NCount.Value) then
+    kill:=kill+Damage[i];
+  if max<(Damage[i]) then
+    begin
+    max:=Damage[i];
+    max_i:=i;
+    end;
+  end;
+Maxdmg.Caption:=FloatToStr(max/100)+'%  '+IntToStr(max_i);
+Maxdmg.Visible:=True;
+Label1.Visible:=True;
+KillModels.Visible:=True;
+KillModels.Caption:=FloatToStr(kill/100)+'%';
+Label3.Visible:=True;
+end;
+
+{procedure TCalculations.ShootingClick(Sender: TObject);
+var Damage: array of real;
+    Dead: array of real;
+  i,w: Integer;
+  Sv,BS,T,S,AP,D,ST:integer;
+  Q,Col:integer;
+  Deadk,Max_i,Max_i_Dead:integer;
+  Max,Max_Dead,kill:real;
+begin
+Max:=0;
+Max_Dead:=0;
+kill:=0;
+Max_i:=0;
+Max_i_Dead:=0;
+if ADOQuery1.Fields.Fields[10].AsString='None' then
+begin
+  label1.Visible:=True;
+  Label1.Caption:='Отряду нечем стрелять';
+end else
+begin
+ADOQuery3.SQL.Clear;
+ADOQuery3.SQL.Add('SELECT * FROM Ballistic_Weapon');
+ADOQuery3.Active:=True;
+ADOQuery3.Filtered:=False;
+ADOQuery3.Filter:='Ballistic_Weapon LIKE ''%'+ADOQuery1.Fields.Fields[10].AsString+'%''';
+ADOQuery3.Filtered:=True;
+SetLength(Damage,Count.Value*ADOQuery3.Fields.Fields[5].AsInteger*ADOQuery3.Fields.Fields[3].AsInteger+1);
+SetLength(Dead,((Count.Value*ADOQuery3.Fields.Fields[5].AsInteger*ADOQuery3.Fields.Fields[3].AsInteger) div ADOQuery2.Fields.Fields[7].AsInteger)+1);
+BS:=ADOQuery1.Fields.Fields[4].AsInteger;
+T:=ADOQuery2.Fields.Fields[6].AsInteger;
+S:=ADOQuery3.Fields.Fields[1].AsInteger;
+AP:=ADOQuery3.Fields.Fields[2].AsInteger;
+D:=ADOQuery3.Fields.Fields[3].AsInteger;
+Sv:=ADOQuery2.Fields.Fields[9].AsInteger;
+if S=T then ST:=4 else
+  if (S div T)>1 then ST:=2 else
+    if S>T then ST:=3 else
+      if S<T then ST:=5 else
+        ST:=6;
+for i := 1 to 10000 do
+  begin
+  Col:=0;
+  for w := 1 to Count.Value*ADOQuery3.Fields.Fields[5].AsInteger do
+    begin
+    Q:=random(6)+1;
+    if Q>=BS then
+      begin
+      Q:=random(6)+1;
+      if Q>=ST then
+        begin
+          Q:=random(6)+1;
+          if Q<(Sv-AP) then Col:=Col+D;
+        end;
+      end;
+    end;
+  Damage[Col]:=Damage[Col]+1;
+  end;
+for var u := 0 to Count.Value*ADOQuery3.Fields.Fields[5].AsInteger*ADOQuery3.Fields.Fields[3].AsInteger+1 do
+  begin
+  if u>=(ADOQuery2.Fields.Fields[7].AsInteger*NCount.Value) then
+    kill:=kill+Damage[u];
+  if max<(Damage[u])/10000 then
+    begin
+    max:=Damage[u]/10000;
+    max_i:=u;
+    end;
+  Deadk:=u div ADOQuery2.Fields.Fields[7].AsInteger;
+  Dead[Deadk]:=Dead[Deadk]+Damage[u];
+  end;
+Max_dmg.Caption:=FloatToStr(max*100)+'%  '+IntToStr(max_i);
+Max_dmg.Visible:=True;
+for var y := 0 to ((Count.Value*ADOQuery3.Fields.Fields[5].AsInteger*ADOQuery3.Fields.Fields[3].AsInteger) div ADOQuery2.Fields.Fields[7].AsInteger) do
+  begin
+  if max_dead<Dead[y] then
+    begin
+    max_dead:=Dead[y];
+    max_i_dead:=y;
+    end;
+  end;
+MaxDead.Caption:=FloatToStr(max_dead/100)+'%  '+IntToStr(max_i_dead);
+MaxDead.Visible:=True;
+KillModels.Visible:=True;
+KillModels.Caption:=FloatToStr(kill/100)+'%';
+Label1.Visible:=True;
+Label2.Visible:=True;
+Label3.Visible:=True;
+end;
+end;  }
+
+
+procedure TCalculations.HTHClick(Sender: TObject);
+var Damage: array of real;
+    Dead: array of real;
+  i,w: Integer;
+  Attacks,Sv,WS,T,S,AP,D,ST:integer;
+  Q,Col:integer;
+  Deadk,Max_i,Max_i_Dead:integer;
+  Max,Max_Dead,kill:real;
+begin
+Max:=0;
+Max_Dead:=0;
+kill:=0;
+Max_i:=0;
+Max_i_Dead:=0;
+if ADOQuery1.Fields.Fields[11].AsString='None' then
+begin
+  AP:=0;
+  S:=ADOQuery1.Fields.Fields[5].AsInteger;;
+  D:=1;
+  Attacks:=ADOQuery1.Fields.Fields[8].AsInteger;;
+  end else
+if ADOQuery1.Fields.Fields[11].AsString<>'None' then
+Begin
+ADOQuery3.SQL.Clear;
+ADOQuery3.SQL.Add('SELECT * FROM Melee');
+ADOQuery3.Active:=True;
+ADOQuery3.Filtered:=False;
+ADOQuery3.Filter:='Weapon_Name LIKE ''%'+ADOQuery1.Fields.Fields[11].AsString+'%''';
+ADOQuery3.Filtered:=True;
+D:=ADOQuery3.Fields.Fields[3].AsInteger;
+AP:=ADOQuery3.Fields.Fields[2].AsInteger;
+S:=ADOQuery3.Fields.Fields[1].AsInteger;
+Attacks:=ADOQuery3.Fields.Fields[5].AsInteger;
+End;
+WS:=ADOQuery1.Fields.Fields[4].AsInteger;
+T:=ADOQuery2.Fields.Fields[6].AsInteger;
+Sv:=ADOQuery2.Fields.Fields[9].AsInteger;
+SetLength(Damage,Count.Value*Attacks*D+1);
+SetLength(Dead,((Count.Value*Attacks*D) div ADOQuery2.Fields.Fields[7].AsInteger)+1);
+if S=T then ST:=4 else
+  if (S div T)>1 then ST:=2 else
+    if S>T then ST:=3 else
+      if S<T then ST:=5 else
+        ST:=6;
+for i := 1 to 10000 do
+  begin
+  Col:=0;
+  for w := 1 to Count.Value*Attacks do
+    begin
+    Q:=random(6)+1;
+    if Q>=WS then
+      begin
+      Q:=random(6)+1;
+      if Q>=ST then
+        begin
+          Q:=random(6)+1;
+          if Q<(Sv-AP) then Col:=Col+D;
+        end;
+      end;
+    end;
+  Damage[Col]:=Damage[Col]+1;
+  end;
+for var u := 0 to Count.Value*Attacks*D+1 do
+  begin
+  if u>=(ADOQuery2.Fields.Fields[7].AsInteger*NCount.Value) then
+    kill:=kill+Damage[u];
+  if max<(Damage[u])/10000 then
+    begin
+    max:=Damage[u]/10000;
+    max_i:=u;
+    end;
+  Deadk:=u div ADOQuery2.Fields.Fields[7].AsInteger;
+  Dead[Deadk]:=Dead[Deadk]+Damage[u];
+  end;
+Maxdmg.Caption:=FloatToStr(max*100)+'%  '+IntToStr(max_i);
+Maxdmg.Visible:=True;
+for var y := 0 to ((Count.Value*Attacks*D) div ADOQuery2.Fields.Fields[7].AsInteger) do
+  begin
+  if max_dead<Dead[y] then
+    begin
+    max_dead:=Dead[y];
+    max_i_dead:=y;
+    end;
+  end;
+MaxDead.Caption:=FloatToStr(max_dead/100)+'%  '+IntToStr(max_i_dead);
+MaxDead.Visible:=True;
+KillModels.Visible:=True;
+KillModels.Caption:=FloatToStr(kill/1000)+'%';
+Label1.Visible:=True;
+Label2.Visible:=True;
+Label3.Visible:=True;
+end;
+
+
+procedure TCalculations.FormActivate(Sender: TObject);
+begin
+ADOQuery1.SQL.Clear;
+Image1.Align:=alClient;
+end;
+
+procedure TCalculations.GroupsBoxClick(Sender: TObject);
+var s:string;
+begin
+ADOQuery1.Filtered:=False;
+s := GroupsBox.Items[GroupsBox.ItemIndex];
+ADOQuery1.Filter:='Group LIKE ''%'+s+'%''';
+ADOQuery1.Filtered:=True;
+Units.Visible:=True;
+UnitsBox.Visible:=True;
+end;
+
+procedure TCalculations.NArmyBoxClick(Sender: TObject);
+var s:string;
+begin
+ADOQuery2.SQL.Clear;
+s := NArmyBox.Items[NArmyBox.ItemIndex];
+ADOQuery2.SQL.Add('SELECT * FROM '+s);
+ADOQuery2.Active:=True;
+NGroupsBox.Visible:=True;
+NGroup.Visible:=True;
+end;
+
+procedure TCalculations.NGroupsBoxClick(Sender: TObject);
+var s:string;
+begin
+ADOQuery2.Filtered:=False;
+s := NGroupsBox.Items[NGroupsBox.ItemIndex];
+ADOQuery2.Filter:='Group LIKE ''%'+s+'%''';
+ADOQuery2.Filtered:=True;
+NUnits.Visible:=True;
+NUnitsBox.Visible:=True;
+end;
+
+procedure TCalculations.NUnitsBoxEnter(Sender: TObject);
+begin
+Opponent.Visible:=True;
+NArmy.Visible:=True;
+NArmyBox.Visible:=True;
+NCount.MinValue:=ADOQuery2.Fields.Fields[12].AsInteger;
+NCount.MaxValue:=ADOQuery2.Fields.Fields[13].AsInteger;
+NCount.Value:=NCount.MinValue;
+NCount.Visible:=True;
+Shooting.Visible:=True;
+HTH.Visible:=True;
+end;
+
+procedure TCalculations.UnitsBoxEnter(Sender: TObject);
+begin
+Opponent.Visible:=True;
+NArmy.Visible:=True;
+NArmyBox.Visible:=True;
+Count.MinValue:=ADOQuery1.Fields.Fields[12].AsInteger;
+Count.MaxValue:=ADOQuery1.Fields.Fields[13].AsInteger;
+Count.Value:=Count.MinValue;
+Count.Visible:=True;
+end;
+
+procedure TCalculations.ArmyBoxClick(Sender: TObject);
+var s:string;
+begin
+ADOQuery1.SQL.Clear;
+s := ArmyBox.Items[ArmyBox.ItemIndex];
+ADOQuery1.SQL.Add('SELECT * FROM '+s);
+ADOQuery1.Active:=True;
+GroupsBox.Visible:=True;
+Group.Visible:=True;
+end;
+
+end.

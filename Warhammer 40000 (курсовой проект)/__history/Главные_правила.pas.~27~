@@ -1,0 +1,77 @@
+unit √лавные_правила;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.MPlayer,
+  Vcl.Imaging.jpeg, Vcl.BaseImageCollection, Vcl.ImageCollection, Vcl.StdCtrls,
+  System.ImageList, Vcl.ImgList, Vcl.VirtualImageList;
+
+type
+  TCore_rules = class(TForm)
+    ImageCollection1: TImageCollection;
+    Panel1: TPanel;
+    Image1: TImage;
+    ScrollBar1: TScrollBar;
+    Image2: TImage;
+    Image3: TImage;
+    VirtualImageList1: TVirtualImageList;
+    procedure ScrollBar1Scroll(Sender: TObject; ScrollCode: TScrollCode;
+      var ScrollPos: Integer);
+    procedure Image2Click(Sender: TObject);
+    procedure Image3Click(Sender: TObject);
+    procedure FormMouseWheel(Sender: TObject; Shift: TShiftState;
+      WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Core_rules: TCore_rules;
+  k:integer;
+implementation
+
+{$R *.dfm}
+
+procedure TCore_rules.FormMouseWheel(Sender: TObject; Shift: TShiftState;
+  WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
+begin
+  if WheelDelta>0 then
+    ScrollBar1.Position:= ScrollBar1.Position-ScrollBar1.SmallChange
+  else ScrollBar1.Position:= ScrollBar1.Position+ScrollBar1.SmallChange;
+  Image1.Top:=-ScrollBar1.Position*6;
+end;
+
+procedure TCore_rules.Image2Click(Sender: TObject);
+begin
+if k>0 then
+  begin
+  dec(k);
+  Image1.Picture.LoadFromFile('C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Win32\Debug\Resources\Core Rules\'+IntToStr(k+1)+'.jpg');
+  ScrollBar1.Position:=0;
+  Image1.Top:=0;
+  end;
+
+end;
+
+procedure TCore_rules.Image3Click(Sender: TObject);
+begin
+if k<25 then
+  begin
+  inc(k);
+  Image1.Picture.LoadFromFile('C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Win32\Debug\Resources\Core Rules\'+IntToStr(k+1)+'.jpg');
+  ScrollBar1.Position:=0;
+  Image1.Top:=0;
+  end;
+end;
+
+procedure TCore_rules.ScrollBar1Scroll(Sender: TObject; ScrollCode: TScrollCode;
+  var ScrollPos: Integer);
+begin
+Image1.Top:=-ScrollPos*6;
+end;
+
+end.

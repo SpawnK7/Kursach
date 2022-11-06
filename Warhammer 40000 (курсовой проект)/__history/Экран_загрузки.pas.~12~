@@ -1,0 +1,42 @@
+unit Ёкран_загрузки;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.jpeg,
+  Vcl.Imaging.pngimage, Vcl.Imaging.GIFImg, Vcl.MPlayer;
+
+type
+  TLoad_Form = class(TForm)
+    MediaPlayer1: TMediaPlayer;
+    Panel1: TPanel;
+    procedure FormActivate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Load_Form: TLoad_Form;
+  i: integer;
+implementation
+
+{$R *.dfm}
+
+uses √лавна€;
+
+procedure TLoad_Form.FormActivate(Sender: TObject);
+begin
+MediaPlayer1.Notify:=true;
+MediaPlayer1.Open; //ќткрытие плеера
+MediaPlayer1.DisplayRect:=Panel1.ClientRect;
+MediaPlayer1.Play;
+end;
+
+
+
+
+end.

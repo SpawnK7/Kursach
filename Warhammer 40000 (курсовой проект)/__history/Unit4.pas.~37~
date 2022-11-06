@@ -1,0 +1,74 @@
+unit Unit4;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls, Raskraska, Vcl.MPlayer;
+
+type
+  TChoice = class(TForm)
+    SM: TImage;
+    MediaPlayer1: TMediaPlayer;
+    Panel1: TPanel;
+    Image1: TImage;
+    procedure NecronClick(Sender: TObject);
+    procedure SMClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
+    procedure Image1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Choice: TChoice;
+
+implementation
+
+{$R *.dfm}
+
+
+procedure TChoice.FormActivate(Sender: TObject);
+begin
+MediaPLayer1.Display:=MediaPlayer1;
+end;
+
+procedure TChoice.Image1Click(Sender: TObject);
+begin
+MediaPlayer1.Display:=Panel1;
+MediaPLayer1.FileName:='Некрон.mp4';
+MediaPLayer1.Open;
+MediaPlayer1.DisplayRect := Panel1.ClientRect;
+MediaPlayer1.Play;
+sleep(1700);
+Choice.Hide;
+end;
+
+procedure TChoice.NecronClick(Sender: TObject);
+begin
+Choice.Hide;
+k:='yes (2).bmp';
+Painter.Image1.Left:=80;
+Painter.Image1.Picture.LoadFromFile(k);
+Painter.ShowModal;
+end;
+
+procedure TChoice.Panel1Click(Sender: TObject);
+begin
+MediaPlayer1.Play;
+end;
+
+procedure TChoice.SMClick(Sender: TObject);
+begin
+Choice.Hide;
+k:='2 (1).bmp';
+Painter.Image1.Left:=0;
+Painter.Image1.Picture.LoadFromFile(k);
+Painter.ShowModal;
+end;
+
+end.

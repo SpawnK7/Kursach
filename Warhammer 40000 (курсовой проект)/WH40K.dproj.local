@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.781,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit4.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Raskraska.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.172,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Тест.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Расчёты.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.753,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Тест.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Расчёты.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.355,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Выбор_персонажа.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit4.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.266,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Расчёты.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Тест.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.800,=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.441,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Расчёты.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.266,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Расчёты.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Тест.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.441,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Расчёты.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.074,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Главные_правила.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit5.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.534,=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.482,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.966,=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.436,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Главная.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.165,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Характеристики.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.436,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Главная.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.928,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Характеристики.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.408,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Раскраска.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Raskraska.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.987,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Характеристики.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.207,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Экран_загрузки.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.673,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Project3.dproj=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Project3.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.928,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Характеристики.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.308,=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit3.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.278,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit3.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.554,=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit5.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.207,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Экран_загрузки.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit2.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.730,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\WH40K.dproj=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Project3.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.355,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Выбор_персонажа.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit4.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.074,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Главные_правила.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit5.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.753,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Тест.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Расчёты.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.408,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Раскраска.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Raskraska.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.781,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit4.pas=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Raskraska.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.163,=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit4.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.682,=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit4.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.171,=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.172,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Тест.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Расчёты.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.165,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Характеристики.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.987,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Характеристики.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.482,C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Warhammer 40000 (курсовой проект)\Unit1.dfm=C:\Users\Admin\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Выбор_персонажа.pas"/>
+    <File Path="Выбор_персонажа.dfm"/>
+    <File Path="Главная.pas"/>
+    <File Path="Главная.dfm"/>
+    <File Path="Главные_правила.pas"/>
+    <File Path="Главные_правила.dfm"/>
+    <File Path="Раскраска.pas"/>
+    <File Path="Раскраска.dfm"/>
+    <File Path="Тест.pas"/>
+    <File Path="Тест.dfm"/>
+    <File Path="Экран_загрузки.pas"/>
+    <File Path="Экран_загрузки.dfm"/>
+    <File Path="Характеристики.pas"/>
+    <File Path="Характеристики.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>

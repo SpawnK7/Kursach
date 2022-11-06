@@ -1,0 +1,38 @@
+unit Unit2;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Imaging.jpeg,
+  Vcl.Imaging.pngimage, GifImg;
+
+type
+  TForm2 = class(TForm)
+    Image1: TImage;
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form2: TForm2;
+  GIF: TGifImage;
+  i: integer;
+implementation
+
+{$R *.dfm}
+
+procedure TForm2.FormActivate(Sender: TObject);
+begin
+randomize;
+i:=1;
+GIF:=TGIFImage.Create;
+GIF.LoadFromFile('GIF\'+IntToStr(i)+'.gif');
+GIF.Animate:=True;
+Image1.Picture.Assign(GIF);
+end;
+
+end.

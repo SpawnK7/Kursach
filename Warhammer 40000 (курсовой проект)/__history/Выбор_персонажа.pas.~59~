@@ -1,0 +1,81 @@
+unit Выбор_персонажа;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage,
+  Vcl.ExtCtrls, Раскраска, Vcl.MPlayer;
+
+type
+  TChoice = class(TForm)
+    NecronPlayer: TMediaPlayer;
+    NecronPanel: TPanel;
+    Necron: TImage;
+    SMPlayer: TMediaPlayer;
+    SPaceMarinePanel: TPanel;
+    SpaceMarine: TImage;
+    procedure NecronClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
+    procedure SpaceMarineClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Choice: TChoice;
+
+implementation
+
+{$R *.dfm}
+
+uses Главная;
+
+
+procedure TChoice.FormActivate(Sender: TObject);
+begin
+NecronPlayer.Display:=NecronPlayer; //Сбрасывает показ видео
+NecronPlayer.Open; //Открытие плеера
+SMPlayer.Display:=SMPlayer; //Сбрасывает показ видео
+SMPlayer.Open; //Открытие плеера
+end;
+
+procedure TChoice.NecronClick(Sender: TObject);
+begin
+NecronPlayer.Display:=NecronPanel; //Установка дисплея медиаплеера на
+                              //панель с изображением некрона
+NecronPlayer.DisplayRect:=NecronPanel.ClientRect; //Подгоняем размер видео
+                                             //под размер панели
+NecronPlayer.Play; //Включает анимацию
+sleep(1700); //Задержка перед показом новой формы, чтобы
+             //анимация успела проиграться
+Choice.Hide; //Закрываем форму выбора
+k:='Resources\Painter\Necron.bmp'; //Заносим путь к файлу с картинкой некрона
+Painter.Image1.Left:=80; //Для того, чтобы он был в середине
+Painter.Image1.Picture.LoadFromFile(k); //Загружаем картинку некрона на форму
+                                       //с раскраской
+Main_Form.Hide;
+Painter.ShowModal; //Вызываем форму с раскраской
+end;
+
+procedure TChoice.SpaceMarineClick(Sender: TObject);
+begin
+SMPlayer.Display:=SpaceMarinePanel; //Установка дисплея медиаплеера на
+                              //панель с изображением некрона
+SMPlayer.DisplayRect:=SpaceMarinePanel.ClientRect; //Подгоняем размер видео
+                                             //под размер панели
+SMPlayer.Play; //Включает анимацию
+sleep(2000); //Задержка перед показом новой формы, чтобы
+             //анимация успела проиграться
+Choice.Hide; //Закрываем форму выбора
+k:='Resources\Painter\SpaceMarine.bmp'; //Заносим путь к файлу с картинкой некрона
+Painter.Image1.Left:=0; //Для того, чтобы он был в середине
+Painter.Image1.Picture.LoadFromFile(k); //Загружаем картинку некрона на форму
+                                       //с раскраской
+Main_Form.Hide;
+Painter.ShowModal; //Вызываем форму с раскраской
+end;
+
+end.

@@ -1,0 +1,35 @@
+program WH40K;
+
+uses
+  Vcl.Forms,
+  Windows,
+  Главная in 'Главная.pas' {Main_Form},
+  Экран_загрузки in 'Экран_загрузки.pas' {Load_Form},
+  Раскраска in 'Раскраска.pas' {Painter},
+  Выбор_персонажа in 'Выбор_персонажа.pas' {Choice},
+  Главные_правила in 'Главные_правила.pas' {Core_rules},
+  Тест in 'Тест.pas' {Test},
+  Характеристики in 'Характеристики.pas' {Stats};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TMain_Form, Main_Form);
+  Application.CreateForm(TPainter, Painter);
+  Application.CreateForm(TChoice, Choice);
+  Application.CreateForm(TCore_rules, Core_rules);
+  Application.CreateForm(TTest, Test);
+  Application.CreateForm(TStats, Stats);
+  Load_Form := TLoad_Form.Create(Application);
+
+  Load_Form.Show;
+  Sleep(5000);
+  Application.CreateForm(TMain_Form, Main_Form);
+  Load_Form.Close;
+
+
+// Запуск программы на выполнение
+  Application.Run;
+end.
+

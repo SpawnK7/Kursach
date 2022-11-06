@@ -1,0 +1,55 @@
+unit Unit3;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs,MMSystem, StdCtrls, Buttons, ExtCtrls, Vcl.Imaging.pngimage,
+  Vcl.Imaging.jpeg;
+
+type
+  TForm3 = class(TForm)
+    Image1: TImage;
+    ColorDialog1: TColorDialog;
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure Image1MouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure FormActivate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form3: TForm3;
+  hmidi: HMIDIOUT;
+  col:tcolor;
+implementation
+
+{$R *.dfm}
+
+
+procedure TForm3.Button1Click(Sender: TObject);
+begin
+if ColorDialog1.Execute then
+col:=ColorDialog1.Color;
+
+end;
+
+procedure TForm3.FormActivate(Sender: TObject);
+begin
+Form3.Width:=Screen.Width;
+Form3.height:=Screen.Height;
+end;
+
+procedure TForm3.Image1MouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+Image1.Canvas.Brush.Color:=col;
+Image1.Canvas.FloodFill(x,y,clBlack,fsBorder);
+end;
+
+
+
+end.
